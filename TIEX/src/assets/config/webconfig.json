@@ -1,0 +1,13 @@
+{
+    "APIURL": "http://localhost:58402/core/",
+    "SSOURL": "http://192.168.1.216/DEV/APPLICATIONS/TOKEN_SSO/token",
+    "ISDEVQA": "1",
+    "IDLE": 20,
+    "TIMETOINACTIVITY": 1800,
+    "CanShowErrorMessages": "0",
+    "LogConsole": "1",
+    "LogDataBase": "1",
+    "LogLocalStorage": "1"
+
+
+}

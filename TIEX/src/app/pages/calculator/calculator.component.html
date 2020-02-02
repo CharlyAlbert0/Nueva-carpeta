@@ -1,0 +1,193 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+
+                <div class="card">
+                    <form method="get" action="/" class="form-horizontal">
+                        <div class="card-header card-header-text" data-background-color="blue">
+                            <h4 class="card-title">Calculator</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <label class="col-sm-1 label-on-left">Producto</label>
+                                <div class="col-sm-11">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input type="text" [(ngModel)]="formModel.ProductUrl" autocomplete="off" (keyup)="ValidSupplier()" name="ProductUrl" class="form-control margenes" value>
+                                        <span class="help-block">pega la url del producto para identificar proveedor.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-3">
+                                        <div class="togglebutton">
+                                            <label>
+                                                                            <input type="checkbox" [checked]="formModel.IsML"  > Mercado libre
+                                                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="togglebutton">
+                                            <label>
+                                                                            <input type="checkbox" [checked]="formModel.IsAMA"> Amazon
+                                                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="togglebutton">
+                                            <label>
+                                                                            <input type="checkbox" [checked]="formModel.IsOther"> Otros
+                                                                        </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-sm-1 label-on-left"> Costo</label>
+                                <div class="col-sm-3">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input [(ngModel)]="formModel.CostProduct" autocomplete="off" name="CostProduct" type="number" placeholder="cantidad en $" pattern="[0-9]+" (blur)="EnterCost()" (keyup.enter)="EnterCost()" class="form-control margenes">
+                                        <span class="help-block">Introduce el costo del producto existente.</span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-1 label-on-left">Compra</label>
+                                <div class="col-sm-3">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input [(ngModel)]="formModel.BuyCost" name="BuyCost" type="number" pattern="[0-9]+" (blur)="EnterBuy()" (keyup.enter)="EnterBuy()" class="form-control margenes">
+                                        <span class="help-block">Introduce cuanto te cuesta el mismo producto.</span>
+                                    </div>
+                                </div>
+                                <label class="col-sm-1 label-on-left"> Venta</label>
+                                <div class="col-sm-3">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input [(ngModel)]="formModel.SellCost" name="SellCost" type="number" pattern="[0-9]+" (keyup.enter)="EnterSellCost()" class="form-control margenes">
+                                        <span class="help-block">Introduce a cuanto quieres vender el producto.</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="margin-top: 19px;">
+                                    <div class="col-sm-3">
+                                        <div class="radio">
+                                            <label>
+                                                                                    <input (change)="handleChange(0)" type="radio" name="optionsRadios" checked="true"> $0
+                                                                                </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="radio">
+                                            <label>
+                                                                            <input (change)="handleChange(50)" type="radio" name="optionsRadios" > $50
+                                                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="radio">
+                                            <label>
+                                                                            <input (change)="handleChange(75)" type="radio" name="optionsRadios"> $75
+                                                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="radio">
+                                            <label>
+                                                                                    <input (change)="handleChange(100)" type="radio" name="optionsRadios" > $100
+                                                                                </label>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <label class="col-sm-1 label-on-left"> Envio</label>
+                                <div class="col-sm-3">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input [(ngModel)]="formModel.SendCost" name="SendCost" type="number" pattern="[0-9]+" (blur)="EnterSend()" (keyup.enter)="EnterSend()" [className]="formModel.IsSendFree ? 'form-control margenes tache' : 'form-control margenes'" class="form-control margenes">
+                                        <span class="help-block">Introduce cuanto cuesta el envio del producto.</span>
+                                        <p></p>
+                                    </div>
+                                    <div class="togglebutton">
+                                        <label>
+                                                                                        <input [checked]="formModel.IsSendFree" type="checkbox"  (change)="IsSendFreeEvent()" > Envio Gratis
+                                                                                    </label>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-1">
+
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="togglebutton">
+                                        <label>
+                                                                                                    <input (change)="IsML13Event()" type="checkbox" > % ML 13
+                                                                                                </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="togglebutton">
+                                        <label>
+                                                                                                    <input (change)="IsML17Event()" type="checkbox" > % ML 17
+                                                                                                </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <a (click)="Calculate('1')" class="btn btn-behance btn-block">Calcular</a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="col-lg-3 col-md-9">
+                <div class="card card-pricing card-raised">
+                    <div class="content">
+                        <h6 class="category">Utilidad Aproximada</h6>
+                        <div [className]="formModel.IsViable ? 'icon icon-success' : 'icon icon-danger'" *ngIf="showResult">
+                            <i class="material-icons" *ngIf="formModel.IsViable">thumb_up</i>
+                            <i class="material-icons" *ngIf="!formModel.IsViable">thumb_down</i>
+                        </div>
+                        <div class="icon icon-bar" *ngIf="!showResult">
+                            <i class="material-icons">keyboard</i>
+                        </div>
+                        <h3 [className]="formModel.IsViable ? 'textsucc' : 'textdan'">$ {{formModel.GainTotal}}</h3>
+                        <p class="card-description">
+                            Determina el dinero y viabilidad que se estaria ganando del producto.
+                        </p>
+                        <a href="#" (click)="Clean()" class="btn btn-rose btn-round">Limpiar</a>
+                        <a href="#" (click)="Save()" class="btn btn-success btn-round">Guardar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
