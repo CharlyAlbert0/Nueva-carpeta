@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TableData } from '../../md/md-table/md-table.component';
 import { CommonModule, CurrencyPipe} from '@angular/common';
+import * as XLSX from 'xlsx';
+
 
 declare var swal:any;
 declare var $: any;
@@ -169,6 +171,25 @@ Clean(){
 }
 
 Save(){
+  debugger
+  let url = "/assets/test_3.xlsx";
+    let req = new XMLHttpRequest();
+    req.open("GET", url, true);
+    req.responseType = "arraybuffer";
+    req.onload =  (e) => {
+      debugger
+        let data = new Uint8Array(req.response);
+        let workbook = XLSX.read(data, {type: "array"});
+        var sheet_name_list = workbook.SheetNames;
+        console.log(XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]], {raw: true, defval:null}))
+
+        const excelBuffer: any = XLSX.write(workbook, {bookType: 'xlsx', type: 'array'});
+
+        // TO export the excel file
+        //this.saveAsExcelFile(excelBuffer, 'X');
+    };
+    req.send();
+
   swal({
     type: "success",
     title: "Good job!",
@@ -179,6 +200,31 @@ Save(){
 
 });
 return false;
+}
+
+onFileChange(evt: any) {
+  debugger
+  /* wire up file reader */
+  const target: DataTransfer = <DataTransfer>(evt.target);
+  if (target.files.length !== 1) throw new Error('Cannot use multiple files');
+  const reader: FileReader = new FileReader();
+  reader.onload = (e: any) => {
+    debugger
+    /* read workbook */
+    const bstr: string = e.target.result;
+    const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});
+
+    /* grab first sheet */
+    const wsname: string = wb.SheetNames[0];
+    const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+    var sheet_name_list = wb.SheetNames;
+        console.log(XLSX.utils.sheet_to_json(wb.Sheets[sheet_name_list[0]], {raw: true, defval:null}))
+
+    /* save data */
+    //this.data = <AOA>(XLSX.utils.sheet_to_json(ws, {header: 1}));
+  };
+  reader.readAsBinaryString(target.files[0]);
 }
 
 CalculateOnEnter(){

@@ -53,6 +53,7 @@
     "twitter-bootstrap-wizard": "^1.2.0",
     "validate": "^3.0.1",
     "web-animations-js": "^2.2.2",
+    "xlsx": "^0.15.5",
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
